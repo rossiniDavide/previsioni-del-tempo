@@ -1,19 +1,24 @@
- let longitudine = 12.454113036228433;
- let latitudine = 41.93402223553517;
+let latitudine = 41.93402223553517;
+let longitudine = 12.454113036228433;
  
- navigator.geolocation.getCurrentPosition()
+ 
+ navigator.geolocation.getCurrentPosition(
  function (event){ 
     console.log("L'utente ha accettato")
     console.log(event)
+    latitudine = event.coords.latitude
+    longitudine = event.coords.longitude
     CreateMap()
 
  },
  function (event){
-    console.log("L'utente ha accettato")
+    console.log("L'utente non ha accettato")
     console.log(event)
+    CreateMap()
     
  }
- function CreateMap (){
+ )
+ function CreateMap(){
    let map = L.map('map').setView(latitudine,longitudine, 16);
    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
